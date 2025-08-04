@@ -121,8 +121,8 @@ const Checkout = () => {
           }
         },
         products: items.map((item) => ({
-          id: parseInt(item.id, 10), // ← agora tratado como string vindo de Game
-          price: item.prices.current
+          id: item.id,
+          price: item.prices.current as number
         }))
       })
     }

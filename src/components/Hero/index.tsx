@@ -1,12 +1,11 @@
-import { useDispatch } from 'react-redux'
-
 import Button from '../Button'
 import Tag from '../Tag'
 
 import * as S from './styles'
+import { useDispatch } from 'react-redux'
+
 import { add, open } from '../../store/reducers/cart'
 import { parseToBrl } from '../../utils'
-import { Game } from '../../types'
 
 type Props = {
   game: Game
@@ -21,15 +20,11 @@ const Hero = ({ game }: Props) => {
   }
 
   return (
-    <S.Banner
-      style={{
-        backgroundImage: `url(${game.media?.cover || ''})`
-      }}
-    >
+    <S.Banner style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <div>
-          {game.details?.category && <Tag>{game.details.category}</Tag>}
-          {game.details?.system && <Tag>{game.details.system}</Tag>}
+          <Tag>{game.details.category}</Tag>
+          <Tag>{game.details.system}</Tag>
         </div>
 
         <S.Infos>

@@ -13,13 +13,14 @@ import { getTotalPrice, parseToBrl } from '../../utils'
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const navigate = useNavigate()
+
   const dispatch = useDispatch()
 
   const closeCart = () => {
     dispatch(close())
   }
 
-  const removeItem = (id: string) => {
+  const removeItem = (id: number) => {
     dispatch(remove(id))
   }
 
@@ -37,18 +38,14 @@ const Cart = () => {
             <ul>
               {items.map((item) => (
                 <S.CartItem key={item.id}>
-                  <img src={item.media?.thumbnail || ''} alt={item.name} />
+                  <img src={item.media.thumbnail} alt={item.name} />
                   <div>
                     <h3>{item.name}</h3>
-                    <Tag>{item.details?.category || 'Indefinido'}</Tag>
-                    <Tag>{item.details?.system || 'Sistema desconhecido'}</Tag>
+                    <Tag>{item.details.category}</Tag>
+                    <Tag>{item.details.system}</Tag>
                     <span>{parseToBrl(item.prices.current)}</span>
                   </div>
-                  <button
-                    onClick={() => removeItem(item.id)}
-                    type="button"
-                    aria-label="Remover item do carrinho"
-                  />
+                  <button onClick={() => removeItem(item.id)} type="button" />
                 </S.CartItem>
               ))}
             </ul>

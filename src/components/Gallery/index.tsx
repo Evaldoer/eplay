@@ -5,7 +5,6 @@ import Section from '../Section'
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
 import closeIcon from '../../assets/images/fechar.png'
-import { GalleryItem } from '../../types'
 
 import * as S from './styles'
 
@@ -15,16 +14,12 @@ type Props = {
   items: GalleryItem[]
 }
 
-interface ModalState {
-  id: string
-  type: 'image' | 'video'
-  url: string
+interface ModalState extends GalleryItem {
   isVisible: boolean
 }
 
 const Gallery = ({ defaultCover, name, items }: Props) => {
   const [modal, setModal] = useState<ModalState>({
-    id: '',
     isVisible: false,
     type: 'image',
     url: ''
@@ -42,7 +37,6 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
 
   const closeModal = () => {
     setModal({
-      id: '',
       isVisible: false,
       type: 'image',
       url: ''
@@ -58,7 +52,6 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
               key={media.url}
               onClick={() => {
                 setModal({
-                  id: media.id,
                   isVisible: true,
                   type: media.type,
                   url: media.url
@@ -91,7 +84,12 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
             <iframe frameBorder={0} src={modal.url} />
           )}
         </S.ModalContent>
-        <div onClick={closeModal} className="overlay"></div>
+        <div
+          onClick={() => {
+            closeModal()
+          }}
+          className="overlay"
+        ></div>
       </S.Modal>
     </>
   )

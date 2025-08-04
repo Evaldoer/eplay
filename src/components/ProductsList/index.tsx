@@ -1,8 +1,9 @@
 import { parseToBrl } from '../../utils'
 import Loader from '../Loader'
+
 import Product from '../Product'
+
 import * as S from './styles'
-import { Game } from '../../types'
 
 export type Props = {
   title: string
@@ -13,8 +14,8 @@ export type Props = {
 }
 
 const ProductsList = ({ background, title, games, id, isLoading }: Props) => {
-  const getGameTags = (game: Game): string[] => {
-    const tags: string[] = []
+  const getGameTags = (game: Game) => {
+    const tags = []
 
     if (game.release_date) {
       tags.push(game.release_date)
@@ -40,23 +41,20 @@ const ProductsList = ({ background, title, games, id, isLoading }: Props) => {
       <div className="container">
         <h2>{title}</h2>
         <S.List>
-          {games && games.length > 0 ? (
+          {games &&
             games.map((game) => (
               <li key={game.id}>
                 <Product
-                  id={Number(game.id)}
-                  category={game.details?.category || ''}
-                  description={game.description || ''}
-                  image={game.media?.thumbnail || game.media?.cover || ''}
+                  id={game.id}
+                  category={game.details.category}
+                  description={game.description}
+                  image={game.media.thumbnail}
                   infos={getGameTags(game)}
-                  system={game.details?.system || ''}
+                  system={game.details.system}
                   title={game.name}
                 />
               </li>
-            ))
-          ) : (
-            <p>Nenhum produto encontrado.</p>
-          )}
+            ))}
         </S.List>
       </div>
     </S.Container>

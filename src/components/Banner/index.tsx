@@ -15,15 +15,14 @@ const Banner = () => {
   }
 
   return (
-    <S.Image style={{ backgroundImage: `url(${game.media?.cover || ''})` }}>
+    <S.Image style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <Tag size="big">Destaque do dia</Tag>
         <div>
           <S.Title>{game.name}</S.Title>
           <S.Prices>
-            De {game.prices?.old && <span>{parseToBrl(game.prices.old)}</span>}
-            <br />
-            Por apenas {parseToBrl(game.prices.current)}
+            De <span>{parseToBrl(game.prices.old)}</span> <br />
+            por apenas {parseToBrl(game.prices.current)}
           </S.Prices>
         </div>
         <Button

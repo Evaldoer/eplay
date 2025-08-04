@@ -27,25 +27,21 @@ const Product = () => {
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <b>Plataforma:</b> {game.details?.system || 'Não informado'}
+          <b>Plataforma:</b> {game.details.system}
           <br />
-          <b>Desenvolvedor:</b> {game.details?.developer || 'Desconhecido'}
+          <b>Desenvolvedor:</b> {game.details.developer}
           <br />
-          <b>Editora:</b> {game.details?.publisher || 'Desconhecido'}
+          <b>Editora:</b> {game.details.publisher}
           <br />
-          <b>Idiomas:</b>{' '}
-          {game.details?.languages?.length
-            ? game.details.languages.join(', ')
-            : 'Informação indisponível'}
+          <b>Idiomas:</b> O jogo oferece suporte a diversos idiomas, incluindo{' '}
+          {game.details.languages.join(', ')}
         </p>
       </Section>
-      {game.media?.cover && game.media?.gallery?.length > 0 && (
-        <Gallery
-          name={game.name}
-          defaultCover={game.media.cover}
-          items={game.media.gallery}
-        />
-      )}
+      <Gallery
+        name={game.name}
+        defaultCover={game.media.cover}
+        items={game.media.gallery}
+      />
     </>
   )
 }
